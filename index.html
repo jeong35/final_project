@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Manager</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark {
+      background: #222;
+      color: white;
+    }
+    nav button {
+      margin-right: 10px;
+    }
+    .task {
+      display: grid;
+      grid-template-columns: 1fr 150px auto;
+      align-items: center;
+      padding: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 5px;
+      gap: 10px;
+    }
+    .task-content {
+      word-break: break-word;
+    }
+    .task-date {
+        font-size: 1em;
+        color: #666;
+    }
+    .task-actions {
+      display: flex;
+      gap: 5px;
+      justify-content: flex-end;
+    }
+    .done .task-content {
+      text-decoration: line-through;
+      color: gray;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+    #filter {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .task-header {
+      display: grid;
+      grid-template-columns: 1fr 150px auto;
+      font-weight: bold;
+      padding: 8px;
+      border-bottom: 2px solid #000;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('form')">Form</button>
+    <button onclick="showPage('about')">About</button>
+    <label>
+      <input type="checkbox" id="theme-toggle" /> Dark Mode
+    </label>
+  </nav>
+
+  <div id="home">
+    <h1>📌 Task Manager</h1>
+    <input type="text" id="task-input" placeholder="New Task" />
+    <input type="date" id="task-date" />
+    <button onclick="addTask()">Add</button>
+    <div id="filter">
+      <input type="text" id="search" placeholder="Search..." oninput="renderTasks()" />
+    </div>
+    <div class="task-header">
+      <div>✅ Task</div>
+      <div>🗓️ Due Date</div>
+      <div style="text-align:right">Actions</div>
+    </div>
+    <div id="task-list"></div>
+  </div>
+
+  <div id="form" style="display:none">
+    <h1>📖 Contact Form</h1>
+    <form onsubmit="return handleFormSubmit(event)">
+      <div>
+        <label>Name</label><br />
+        <input type="text" id="name" />
+        <div class="error" id="error-name"></div>
+      </div>
+      <br>
+      <div>
+        <label>Email</label><br />
+        <input type="email" id="email" />
+        <div class="error" id="error-email"></div>
+      </div>
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div id="about" style="display:none">
+    <h1>🤷🏻‍♀️ About This Project</h1>
+    <p>This is a simple task manager web app with a theme switcher and contact form. It uses localStorage to save tasks and user theme.</p>
+  </div>
+
+  <script>
+    let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+
+    function showPage(page) {
+      document.getElementById("home").style.display = page === "home" ? "block" : "none";
+      document.getElementById("form").style.display = page === "form" ? "block" : "none";
+      document.getElementById("about").style.display = page === "about" ? "block" : "none";
+    }
+
+    function renderTasks() {
+      const list = document.getElementById("task-list");
+      const search = document.getElementById("search").value.toLowerCase();
+      list.innerHTML = "";
+      tasks.forEach((task, index) => {
+        if (!task.text.toLowerCase().includes(search)) return;
+        const div = document.createElement("div");
+        div.className = "task";
+        if (task.done) div.classList.add("done");
+        div.innerHTML = `
+          <div class="task-content" onclick="toggleTask(${index})">${task.text}</div>
+          <div class="task-date">${task.date ? task.date : ""}</div>
+          <div class="task-actions">
+            <button onclick="editTask(${index})">Edit</button>
+            <button onclick="deleteTask(${index})">Delete</button>
+          </div>
+        `;
+        list.appendChild(div);
+      });
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    function addTask() {
+      const input = document.getElementById("task-input");
+      const dateInput = document.getElementById("task-date");
+      const text = input.value.trim();
+      const date = dateInput.value;
+      if (text) {
+        tasks.push({ text, date, done: false });
+        input.value = "";
+        dateInput.value = "";
+        renderTasks();
+      }
+    }
+
+    function toggleTask(index) {
+      tasks[index].done = !tasks[index].done;
+      renderTasks();
+    }
+
+    function deleteTask(index) {
+      if (confirm("Are you sure you want to delete this task?")) {
+        tasks.splice(index, 1);
+        renderTasks();
+      }
+    }
+
+    function editTask(index) {
+      const newText = prompt("Edit task:", tasks[index].text);
+      if (newText !== null) {
+        tasks[index].text = newText.trim();
+        renderTasks();
+      }
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      let valid = true;
+      document.getElementById("error-name").textContent = "";
+      document.getElementById("error-email").textContent = "";
+
+      if (!name) {
+        document.getElementById("error-name").textContent = "Name is required";
+        valid = false;
+      }
+      if (!email.includes("@")) {
+        document.getElementById("error-email").textContent = "Email is invalid";
+        valid = false;
+      }
+      if (valid) {
+        alert("Form submitted successfully!");
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+      }
+      return false;
+    }
+
+    const themeToggle = document.getElementById("theme-toggle");
+    const savedTheme = localStorage.getItem("theme") || "light";
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark");
+      themeToggle.checked = true;
+    }
+    themeToggle.addEventListener("change", () => {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+    });
+
+    renderTasks();
+  </script>
+</body>
+</html>
