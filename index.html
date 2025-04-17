@@ -8,13 +8,13 @@
 </head>
 <body>
   <nav>
-    <button onclick="showPage('home')">Home</button>
-    <button onclick="showPage('form')">Form</button>
-    <button onclick="showPage('about')">About</button>
-    <label>
+    <a href="#" data-page="home">Home</a>
+    <a href="#" data-page="form">Form</a>
+    <a href="#" data-page="about">About</a>
+    <label style="margin-left:auto">
       <input type="checkbox" id="theme-toggle" /> Dark Mode
     </label>
-  </nav>
+  </nav>  
 
   <div id="home">
     <h1>📌 Task Manager</h1>
@@ -86,6 +86,14 @@
       });
       localStorage.setItem("tasks", JSON.stringify(tasks));
     }
+
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault(); // a 태그 기본 이동 막기
+        const page = e.target.dataset.page;
+        showPage(page);
+      });
+    });
 
     function addTask() {
       const input = document.getElementById("task-input");
