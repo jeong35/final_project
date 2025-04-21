@@ -1,66 +1,93 @@
 body {
-    font-family: sans-serif;
-    margin: 20px;
-    transition: background 0.3s, color 0.3s;
-}
-body.dark {
-    background: #222;
-    color: white;
-}
-nav {
-    display: flex;
-    gap: 2.5rem;
-    align-items: center;
-    background-color: #f0f0f0;
-    padding: 1rem;
-}
-nav a {
-    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: #f0f2f5;
     color: #333;
-    font-weight: bold;
-}
-nav a:hover {
-    color: skyblue;
-}  
-.task {
-    display: grid;
-    grid-template-columns: 1fr 150px auto;
-    align-items: center;
-    padding: 8px;
-    border: 1px solid #ccc;
-    margin-bottom: 5px;
-    gap: 10px;
-}
-.task-content {
-    word-break: break-word;
-}
-.task-date {
-    font-size: 1em;
-    color: #666;
-}
-.task-actions {
+  }
+  nav {
     display: flex;
-    gap: 5px;
-    justify-content: flex-end;
-}
-.done .task-content {
-    text-decoration: line-through;
-    color: gray;
-}
-.error {
-    color: red;
-    font-size: 0.9em;
-}
-#filter {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.task-header {
-    display: grid;
-    grid-template-columns: 1fr 150px auto;
-    font-weight: bold;
-    padding: 8px;
-    border-bottom: 2px solid #000;
-    margin-top: 10px;
-    margin-bottom: 5px;
-}
+    justify-content: center;
+    align-items: center;
+    background-color: #0066cc;
+    padding: 1rem;
+    flex-wrap: wrap;
+  }
+  nav button {
+    margin: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background-color: white;
+    color: #0066cc;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  nav button:hover {
+    background-color: #e6f0ff;
+  }
+  nav label {
+    color: white;
+    margin-left: auto;
+    padding: 0 1rem;
+  }
+  h1, h2 {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  .content {
+    max-width: 800px;
+    margin: auto;
+    padding: 1rem;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    background: white;
+    margin: 0.5rem 0;
+    padding: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  button.add-btn {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button.add-btn:hover {
+    background-color: #005bb5;
+  }
+  .checklist-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    margin-bottom: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .dark {
+    background-color: #121212;
+    color: white;
+  }
+  .dark nav {
+    background-color: #1f1f1f;
+  }
+  .dark nav button {
+    background-color: #333;
+    color: white;
+  }
+  .dark nav button:hover {
+    background-color: #444;
+  }
+  .dark li, .dark .checklist-item {
+    background-color: #222;
+    color: white;
+  }
