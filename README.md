@@ -8,15 +8,15 @@
 
 ## 👥 Team Members and Roles
 
-- **Dayeon**  
+- **Dayeon Oh**  
   Created the overall structure of the application using HTML, CSS, and JavaScript.  
   Set up the basic functionality, navigation system, and checklist logic.
 
-- **Yujeong**  
+- **Yujeong Kim**  
   Focused on CSS styling and refined the visual design of the website.  
-  Suggested places which are good to travel in Korea.
+  Created contents for the cards that show places to travel in Seoul.
 
-- **Jeongin**  
+- **Jeongin Choi**  
   Managed the GitHub repository, including commits and version control.  
   Reviewed the codebase and made improvements to ensure better structure and readability.
 
