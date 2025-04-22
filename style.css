@@ -11,6 +11,7 @@ nav {
     background-color: #0066cc;
     padding: 1rem;
     flex-wrap: wrap;
+    gap: 0.5rem;
 }
 nav button {
     margin: 0.5rem;
@@ -25,6 +26,17 @@ nav button {
 nav button:hover {
     background-color: #e6f0ff;
 }
+@media (max-width: 850px) {
+    nav button {
+      flex: 1 0 20%;
+      max-width: 20%;
+    }
+  
+    nav button:nth-child(n+5) {
+      flex: 1 0 20%;
+      max-width: 20%;
+    }
+  }
 nav label {
     color: white;
     margin-left: auto;
