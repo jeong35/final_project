@@ -20,7 +20,7 @@
           </div>
         </div>
     </nav>
-      
+    <!-- Dark mode toggle -->
     <div class="floating-theme-toggle">
         <label>
             <input type="checkbox" id="theme-toggle" /> dark mode
@@ -35,7 +35,7 @@
         <button onclick="showPage('night')">🌃 Night Life</button>
         <button onclick="showPage('culture')">🏛️ Culture</button>
     </nav>
-
+  <!-- Personal checklist -->
   <div id="home" class="content">
     <h2 style="font-size: 1.3rem; font-weight: 400; line-height: 1.6;">
       🌟 Your list of places to visit in Seoul 🌟
@@ -43,7 +43,7 @@
     </h2>
     <div id="checklist"></div>
   </div>
-
+  <!-- Navigation bar contents -->
   <div id="food" class="content" style="display:none">
     <h2>🍽️ Food</h2>
     <ul id="food-list"></ul>
@@ -73,11 +73,11 @@
     <h2>🏛️ Cultural Spots</h2>
     <ul id="culture-list"></ul>
   </div>
-
+  <!-- Form Submit -->
   <div id="form-section" class="content" style="display: none;">
     <h2>✍️ Submit Your Trip Plan</h2>
     <h2 style="font-size: 1.3rem; font-weight: 400; line-height: 1.6;">
-      We will send you the list of plans that you added.
+      We will send you the list of plans that you added to your e-mail.
     </h2>
     <form id="trip-form" onsubmit="submitTripPlan(event)" class="trip-form">
       <input type="text" id="trip-name" placeholder="Trip Title" required />
