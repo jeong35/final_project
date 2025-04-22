@@ -41,3 +41,6 @@
 
 - **Recommendations**  
   Each category includes suggestions of popular locations in Seoul.
+
+- **Form Validation**  
+  Users can submit their trip name, name, and email.
