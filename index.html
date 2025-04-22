@@ -14,7 +14,10 @@
     <nav class="nav-top-row">
         <div class="nav-top-inner-vertical">
           <span class="top-message"><br>🇰🇷 Add all the places you want to visit in Seoul! 🇰🇷</span>
-          <button class="checklist-btn" onclick="showPage('home')">📋 Your List</button>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+            <button class="checklist-btn" onclick="showPage('home')">📋 Your List</button>
+            <button class="checklist-btn" onclick="showForm()">✍️  Submit Plan</button>
+          </div>
         </div>
     </nav>
       
@@ -71,6 +74,19 @@
     <ul id="culture-list"></ul>
   </div>
 
+  <div id="form-section" class="content" style="display: none;">
+    <h2>✍️ Submit Your Trip Plan</h2>
+    <h2 style="font-size: 1.3rem; font-weight: 400; line-height: 1.6;">
+      We will send you the list of plans that you added.
+    </h2>
+    <form id="trip-form" onsubmit="submitTripPlan(event)" class="trip-form">
+      <input type="text" id="trip-name" placeholder="Trip Title" required />
+      <input type="text" id="user-name" placeholder="Your Name" required />
+      <input type="email" id="user-email" placeholder="Email" required />
+      <button type="submit" class="submit-btn">Submit Plan</button>
+    </form>
+  </div>
+
   <script>
     const pages = ["home", "food", "shopping", "scenery", "activities", "night", "culture"];
 
@@ -78,7 +94,34 @@
       pages.forEach(p => {
         document.getElementById(p).style.display = p === page ? 'block' : 'none';
       });
+
+      document.getElementById("form-section").style.display = 'none'; // hide form
+      document.querySelector('.nav-second-row').style.display = 'flex'; // show category nav
     }
+
+    
+    function showForm() {
+      pages.forEach(p => document.getElementById(p).style.display = 'none');
+      document.querySelector('.nav-second-row').style.display = 'none';
+      document.getElementById("form-section").style.display = 'block';
+    }
+
+
+    function submitTripPlan(event) {
+      event.preventDefault();
+      const title = document.getElementById("trip-name").value.trim();
+      const name = document.getElementById("user-name").value.trim();
+      const email = document.getElementById("user-email").value.trim();
+
+      if (!title || !name || !email) {
+        alert("Please fill out all fields.");
+        return;
+      }
+
+      alert(`🎉 Thank you, ${name}! Your trip "${title}" has been submitted.`);
+      document.getElementById("trip-form").reset();
+    }
+
 
     const checklist = JSON.parse(localStorage.getItem("korea-checklist") || "[]");
 
