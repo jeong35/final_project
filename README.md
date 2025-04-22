@@ -2,11 +2,7 @@
 
 ## Project Summary
 
-**Korea Trip Planner** is a simple and interactive web application designed to help users plan their trip to Seoul, South Korea.  
-It provides a categorized checklist of popular destinations and experiences, food spots, shopping areas, cultural sites, etc.  
-Users can browse each category, add their favorite places to a personalized checklist,  
-and toggle between light and dark themes for a better visual experience.  
-This project is built using HTML, CSS, and JavaScript, and is fully functional in the browser with persistent data storage via `localStorage`.
+**Korea Trip Planner** is a simple and interactive web application designed to help users plan their trip to Seoul, South Korea. It provides a categorized checklist of popular destinations and experiences, food spots, shopping areas, cultural sites, etc. Users can browse each category, add their favorite places to a personalized checklist by clicking add button on the right side of each places' introduction, and toggle between light and  dark themes for a better visual experience. This project is built using HTML, CSS, and JavaScript, and is fully functional in the browser with persistent data storage via `localStorage`.
 
 ---
 
